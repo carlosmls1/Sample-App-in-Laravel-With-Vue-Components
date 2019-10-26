@@ -8,12 +8,6 @@ services:
       - MARIADB_USER=my_user
       - MARIADB_DATABASE=my_database
       - MARIADB_PASSWORD=my_password
-  composer_installation:
-    container_name: composer_installation
-    image: composer
-    volumes:
-      - ./:/app
-    command: composer install --ignore-platform-reqs
   myapp:
     tty: true
     image: bitnami/laravel:6-debian-9
@@ -22,6 +16,7 @@ services:
       - DB_USERNAME=my_user
       - DB_DATABASE=my_database
       - DB_PASSWORD=my_password
+      - APP_DEBUG=true
     depends_on:
       - mariadb
     ports:
